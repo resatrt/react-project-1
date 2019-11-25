@@ -1,39 +1,39 @@
 import React from 'react';
+import logo from './logo.svg';
 import './App.css';
-import Input from './Input/input'
-import TodoList from './TodoList/todoList'
-import 'normalize.css'
+import TodoInput from './TodoInput/todoInput'
+import TodoItem from './TodoItem/todoItem'
 
 class App extends React.Component {
   constructor() {
     super()
     this.state = {
-      newTodo: '新的待办',
+      newTodo: 'test',
       todoList: [
-        { id: 1, title: '第一个待办' },
-        { id: 2, title: '第二个待办' }
+        { id: 1, title: '第一个任务' },
+        { id: 2, title: '第二个任务' }
       ]
     }
   }
   render() {
-    let todos = this.state.todoList.map((item, index) => {
-      return (
-        <li>
-          <TodoList todo={item}/>
-        </li>
-      )
+
+    let todos = this.state.todoList.map((item,index)=> {
+    return (
+      <li>
+        <TodoItem todo={item}/>
+      </li>
+    )
     })
     return (
       <div className='App'>
-        <h1>我的待办</h1>
-        <div>
-          <Input content={this.state.newTodo}/>
+        <h1>我的任务</h1>
+        <div className='inputWrapper'>
+         <TodoInput content={this.state.newTodo}  />
         </div>
         <ol>
           {todos}
         </ol>
       </div>
-
     )
   }
 }
