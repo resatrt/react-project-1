@@ -18,7 +18,9 @@ class App extends React.Component {
       newTodo: '',
       todoList: []
     }
+
   }
+
   addTodo(event) {
     this.state.todoList.push({
       id: idMaker(),
@@ -31,28 +33,34 @@ class App extends React.Component {
       todoList: this.state.todoList
     })
   }
-  changeTitle(event){
+  changeTitle(event) {
+    console.log(event.target)
     this.setState({
-      newTodo:event.target.value,
-      todoList:this.state.todoList
+      newTodo: event.target.value,
+      todoList: this.state.todoList
     })
+  }
+  toggle(e, todo) {
+    todo.status = todo.status === 'completed' ? '' : 'completed'
+    this.setState(this.state)
   }
   render() {
     let todos = this.state.todoList.map((item, index) => {
       return (
         <li key={index}>
-          <TodoItem todo={item.title} />
+          <TodoItem todo={item} onToggle={this.toggle.bind(this)} />
         </li>
       )
     })
+
     return (
       <div className='App'>
         <h1>我的任务</h1>
         <div className='inputWrapper'>
-          {<TodoInput 
-          content={this.state.newTodo} 
-          onChange={this.changeTitle.bind(this)}   
-          onSubmit={this.addTodo.bind(this)} />/*此处必须绑定this*/}
+          {<TodoInput
+            content={this.state.newTodo}
+            onChange={this.changeTitle.bind(this)}
+            onSubmit={this.addTodo.bind(this)} />/*此处必须绑定this*/}
         </div>
         <ol>
           {todos}
