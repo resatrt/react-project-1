@@ -1,10 +1,19 @@
 import React from 'react'
 
-class TodoInput extends React.Component{
-    render(){
-        return(
-            <input type='text' defaultValue={this.props.content} />
+class TodoInput extends React.Component {
+    render() {
+        return (
+            <input type='text' defaultValue={this.props.content}
+             
+            onKeyPress={this.submit.bind(this)}
+            />
         )
     }
+    submit(e){
+        if(e.key==='Enter'){
+            this.props.onSubmit(e)
+        }
+    }
+  
 }
 export default TodoInput
