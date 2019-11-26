@@ -31,7 +31,12 @@ class App extends React.Component {
       todoList: this.state.todoList
     })
   }
- 
+  changeTitle(event){
+    this.setState({
+      newTodo:event.target.value,
+      todoList:this.state.todoList
+    })
+  }
   render() {
     let todos = this.state.todoList.map((item, index) => {
       return (
@@ -46,7 +51,7 @@ class App extends React.Component {
         <div className='inputWrapper'>
           {<TodoInput 
           content={this.state.newTodo} 
-          
+          onChange={this.changeTitle.bind(this)}   
           onSubmit={this.addTodo.bind(this)} />/*此处必须绑定this*/}
         </div>
         <ol>
