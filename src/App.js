@@ -1,8 +1,9 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
-import TodoInput from './TodoInput/todoInput'
-import TodoItem from './TodoItem/todoItem'
+import './reset.css';
+import TodoInput from './TodoInput/todoInput';
+import TodoItem from './TodoItem/todoItem';
+import 'normalize.css';
 
 class App extends React.Component {
   constructor() {
@@ -17,18 +18,18 @@ class App extends React.Component {
   }
   render() {
 
-    let todos = this.state.todoList.map((item,index)=> {
-    return (
-      <li>
-        <TodoItem todo={item}/>
-      </li>
-    )
+    let todos = this.state.todoList.map((item, index) => {
+      return (
+        <li>
+          <TodoItem todo={item.title} />
+        </li>
+      )
     })
     return (
       <div className='App'>
         <h1>我的任务</h1>
         <div className='inputWrapper'>
-         <TodoInput content={this.state.newTodo}  />
+          <TodoInput content={this.state.newTodo} />
         </div>
         <ol>
           {todos}

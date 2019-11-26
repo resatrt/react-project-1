@@ -3,7 +3,7 @@ import React from 'react'
 class TodoItem extends React.Component {
     render() {
         return (
-            <div>{this.props.todo.title}</div>
+            <div>{this.props.todo}</div>
 
         )
     }
