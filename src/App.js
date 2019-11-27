@@ -48,7 +48,9 @@ class App extends React.Component {
     this.setState(this.state)
   }
   render() {
-    let todos = this.state.todoList.map((item, index) => {
+    let todos = this.state.todoList
+    .filter((item)=>!item.delated)//filter函数是个筛选函数,此处item.delated的值为false，
+    .map((item, index) => {      //取反为true，即取todoList里delate为false的对象
       return (
         <li key={index}>
           <TodoItem todo={item} 
