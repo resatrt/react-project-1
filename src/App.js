@@ -19,9 +19,10 @@ class App extends React.Component {
       newTodo: '',
       todoList: localStore.load('todoList') || []
     }
-
   }
-
+ componentDidUpdate(){
+   localStore.save('todoList',this.state.todoList)
+ }
   addTodo(event) {
     this.state.todoList.push({
       id: idMaker(),
@@ -33,24 +34,20 @@ class App extends React.Component {
       newTodo: '',
       todoList: this.state.todoList
     })
-    localStore.save('todoList',this.state.todoList)
   }
   changeTitle(event) {
     this.setState({
       newTodo: event.target.value,
       todoList: this.state.todoList
     })
-    localStore.save('todoList', this.state.todoList)
   }
   toggle(e, todo) {
     todo.status = todo.status === 'completed' ? '' : 'completed'
     this.setState(this.state)
-    localStore.save('todoList', this.state.todoList)
   }
   delate(event, todo) {
     todo.delated = true
     this.setState(this.state)
-    localStore.save('todoList', this.state.todoList)
   }
   render() {
     let todos = this.state.todoList
