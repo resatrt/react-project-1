@@ -34,7 +34,6 @@ class App extends React.Component {
     })
   }
   changeTitle(event) {
-    console.log(event.target)
     this.setState({
       newTodo: event.target.value,
       todoList: this.state.todoList
@@ -44,11 +43,17 @@ class App extends React.Component {
     todo.status = todo.status === 'completed' ? '' : 'completed'
     this.setState(this.state)
   }
+  delate(event,todo){
+    todo.delated=true
+    this.setState(this.state)
+  }
   render() {
     let todos = this.state.todoList.map((item, index) => {
       return (
         <li key={index}>
-          <TodoItem todo={item} onToggle={this.toggle.bind(this)} />
+          <TodoItem todo={item} 
+          onToggle={this.toggle.bind(this)}
+          onDelate={this.delate.bind(this)} />
         </li>
       )
     })
