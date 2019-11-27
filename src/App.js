@@ -33,6 +33,7 @@ class App extends React.Component {
       newTodo: '',
       todoList: this.state.todoList
     })
+    localStore.save('todoList',this.state.todoList)
   }
   changeTitle(event) {
     this.setState({
