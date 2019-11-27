@@ -4,6 +4,7 @@ import './reset.css';
 import TodoInput from './TodoInput/todoInput';
 import TodoItem from './TodoItem/todoItem';
 import 'normalize.css';
+import * as localStore from './localStore'
 
 let id = 0
 function idMaker() {
@@ -16,7 +17,7 @@ class App extends React.Component {
     super(props)
     this.state = {
       newTodo: '',
-      todoList: []
+      todoList: localStore.load('todoList') || []
     }
 
   }
@@ -38,27 +39,30 @@ class App extends React.Component {
       newTodo: event.target.value,
       todoList: this.state.todoList
     })
+    localStore.save('todoList', this.state.todoList)
   }
   toggle(e, todo) {
     todo.status = todo.status === 'completed' ? '' : 'completed'
     this.setState(this.state)
+    localStore.save('todoList', this.state.todoList)
   }
-  delate(event,todo){
-    todo.delated=true
+  delate(event, todo) {
+    todo.delated = true
     this.setState(this.state)
+    localStore.save('todoList', this.state.todoList)
   }
   render() {
     let todos = this.state.todoList
-    .filter((item)=>!item.delated)//filter函数是个筛选函数,此处item.delated的值为false，
-    .map((item, index) => {      //取反为true，即取todoList里delate为false的对象
-      return (
-        <li key={index}>
-          <TodoItem todo={item} 
-          onToggle={this.toggle.bind(this)}
-          onDelate={this.delate.bind(this)} />
-        </li>
-      )
-    })
+      .filter((item) => !item.delated)//filter函数是个筛选函数,此处item.delated的值为false，
+      .map((item, index) => {      //取反为true，即取todoList里delate为false的对象
+        return (
+          <li key={index}>
+            <TodoItem todo={item}
+              onToggle={this.toggle.bind(this)}
+              onDelate={this.delate.bind(this)} />
+          </li>
+        )
+      })
 
     return (
       <div className='App'>
