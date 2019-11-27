@@ -69,7 +69,7 @@ class App extends React.Component {
             onChange={this.changeTitle.bind(this)}
             onSubmit={this.addTodo.bind(this)} />/*此处必须绑定this*/}
         </div>
-        <ol>
+        <ol className='todoList'>
           {todos}
         </ol>
       </div>
