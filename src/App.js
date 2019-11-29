@@ -4,7 +4,7 @@ import './reset.css';
 import TodoInput from './TodoInput/todoInput';
 import TodoItem from './TodoItem/todoItem';
 import 'normalize.css';
-import * as localStore from './localStore'
+import UserDialog from './UserDialog'
 
 
 let id = 0
@@ -18,11 +18,11 @@ class App extends React.Component {
     super(props)
     this.state = {
       newTodo: '',
-      todoList: localStore.load('todoList') || []
+      todoList:  []
     }
   }
   componentDidUpdate() {
-    localStore.save('todoList', this.state.todoList)
+  
   }
   addTodo(event) {
     this.state.todoList.push({
@@ -75,6 +75,7 @@ class App extends React.Component {
         <ol className='todoList'>
           {todos}
         </ol>
+        <UserDialog />
       </div>
     )
   }
