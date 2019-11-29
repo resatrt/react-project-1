@@ -17,12 +17,13 @@ class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
+      user: {},
       newTodo: '',
-      todoList:  []
+      todoList: []
     }
   }
   componentDidUpdate() {
-  
+
   }
   addTodo(event) {
     this.state.todoList.push({
@@ -50,6 +51,10 @@ class App extends React.Component {
     todo.delated = true
     this.setState(this.state)
   }
+  onSignUp(user){
+    this.state.user=user
+    this.setState(this.state)
+  }
   render() {
     let todos = this.state.todoList
       .filter((item) => !item.delated)//filter函数是个筛选函数,此处item.delated的值为false，
@@ -65,7 +70,7 @@ class App extends React.Component {
 
     return (
       <div className='App'>
-        <h1>我的任务</h1>
+        <h1>{this.state.user.username || '我'}的待办</h1>
         <div className='inputWrapper'>
           {<TodoInput
             content={this.state.newTodo}
@@ -75,7 +80,7 @@ class App extends React.Component {
         <ol className='todoList'>
           {todos}
         </ol>
-        <UserDialog />
+        <UserDialog onSignUp={this.onSignUp.bind(this)} />
       </div>
     )
   }

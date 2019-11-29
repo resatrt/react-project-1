@@ -22,7 +22,7 @@ export default class UserDialog extends React.Component {
         e.preventDefault()
         let { username, password } = this.state.formData
         let success = (user) => {
-            console.log(user)
+            this.props.onSignUp.call(null,user)//用call 就不指定this
         }
         let error = (error) => {
             console.log(error)
