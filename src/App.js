@@ -7,12 +7,17 @@ import 'normalize.css';
 import * as localStore from './localStore'
 import AV from 'leancloud-storage'
 
-var APP_ID = 'pEMYmCotCpDs8mpGE8L2wS0y - gzGzoHsz'
-var APP_KEY = 'pYMJXjgzCIp4M4DJKLUXuavz'
 AV.init({
-  appId: APP_ID,
-  appKey: APP_KEY,
-  serverURLs:'https://pemymcot.lc-cn-n1-shared.com' //这个服务器地址必须要写，按照方方上的不写不行
+  appId: "pEMYmCotCpDs8mpGE8L2wS0y-gzGzoHsz",
+  appKey: "pYMJXjgzCIp4M4DJKLUXuavz",
+  serverURLs: "https://pemymcot.lc-cn-n1-shared.com"
+});
+
+var TestObject = AV.Object.extend('TestObject');
+var testObject = new TestObject();
+testObject.set('words', 'Hello world!');
+testObject.save().then(function (testObject) {
+  console.log('保存成功。')
 })
 
 let id = 0
