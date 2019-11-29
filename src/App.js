@@ -5,6 +5,15 @@ import TodoInput from './TodoInput/todoInput';
 import TodoItem from './TodoItem/todoItem';
 import 'normalize.css';
 import * as localStore from './localStore'
+import AV from 'leancloud-storage'
+
+var APP_ID = 'pEMYmCotCpDs8mpGE8L2wS0y - gzGzoHsz'
+var APP_KEY = 'pYMJXjgzCIp4M4DJKLUXuavz'
+AV.init({
+  appId: APP_ID,
+  appKey: APP_KEY,
+  serverURLs:'https://pemymcot.lc-cn-n1-shared.com' //这个服务器地址必须要写，按照方方上的不写不行
+})
 
 let id = 0
 function idMaker() {
@@ -20,9 +29,9 @@ class App extends React.Component {
       todoList: localStore.load('todoList') || []
     }
   }
- componentDidUpdate(){
-   localStore.save('todoList',this.state.todoList)
- }
+  componentDidUpdate() {
+    localStore.save('todoList', this.state.todoList)
+  }
   addTodo(event) {
     this.state.todoList.push({
       id: idMaker(),
