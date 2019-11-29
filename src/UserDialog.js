@@ -1,6 +1,6 @@
 import React from 'react'
 import './UserDialog.css'
-import {signUp} from './leancloud'
+import { signUp } from './leancloud'
 
 export default class UserDialog extends React.Component {
     constructor(props) {
@@ -22,12 +22,12 @@ export default class UserDialog extends React.Component {
         e.preventDefault()
         let { username, password } = this.state.formData
         let success = (user) => {
-            this.props.onSignUp.call(null,user)//用call 就不指定this
+            this.props.onSignUp.call(null, user)//用call 就不指定this
         }
         let error = (error) => {
             console.log(error)
         }
-        signUp(username,password,success,error)
+        signUp(username, password, success, error)
     }
     signIn() { }
     changeFormData(key, e) { //前面的参数是绑定的，username之类的，后面的是事件本身
@@ -71,9 +71,13 @@ export default class UserDialog extends React.Component {
         return (
             <div className='UserDialog-Wrapper'>
                 <div className='UserDialog'>
-                    <nav onChange={this.switch.bind(this)}>
-                        <label><input type='radio' value='signUp' checked={this.state.selected === 'signUp'} />注册</label>
-                        <label><input type='radio' value='signIn' checked={this.state.selected === 'signIn'} />登录</label>
+                    <nav >
+                        <label><input type='radio' value='signUp'
+                            checked={this.state.selected === 'signUp'}
+                            onChange={this.switch.bind(this)} />注册</label>
+                        <label><input type='radio' value='signIn'
+                            checked={this.state.selected === 'signIn'}
+                            onChange={this.switch.bind(this)} />登录</label>
                     </nav>
                     <div className='panes'>
                         {this.state.selected === 'signUp' ? signUpForm : null}

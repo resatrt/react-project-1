@@ -52,7 +52,8 @@ class App extends React.Component {
     this.setState(this.state)
   }
   onSignUp(user){
-    this.state.user=user
+    let stateCopy=JSON.parse(JSON.stringify(this.state))
+    stateCopy.user=user
     this.setState(this.state)
   }
   render() {
