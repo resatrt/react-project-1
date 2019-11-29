@@ -51,9 +51,9 @@ class App extends React.Component {
     todo.delated = true
     this.setState(this.state)
   }
-  onSignUp(user){
-    let stateCopy=JSON.parse(JSON.stringify(this.state))
-    stateCopy.user=user
+  onSignUp(user) {
+    let stateCopy = JSON.parse(JSON.stringify(this.state))
+    stateCopy.user = user
     this.setState(this.state)
   }
   render() {
@@ -81,7 +81,7 @@ class App extends React.Component {
         <ol className='todoList'>
           {todos}
         </ol>
-        <UserDialog onSignUp={this.onSignUp.bind(this)} />
+        {this.state.user.id ? null : <UserDialog onSignUp={this.onSignUp.bind(this)} />}
       </div>
     )
   }
