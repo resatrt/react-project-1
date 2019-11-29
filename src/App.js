@@ -5,20 +5,7 @@ import TodoInput from './TodoInput/todoInput';
 import TodoItem from './TodoItem/todoItem';
 import 'normalize.css';
 import * as localStore from './localStore'
-import AV from 'leancloud-storage'
 
-AV.init({
-  appId: "pEMYmCotCpDs8mpGE8L2wS0y-gzGzoHsz",
-  appKey: "pYMJXjgzCIp4M4DJKLUXuavz",
-  serverURLs: "https://pemymcot.lc-cn-n1-shared.com"
-});
-
-var TestObject = AV.Object.extend('TestObject');
-var testObject = new TestObject();
-testObject.set('words', 'Hello world!');
-testObject.save().then(function (testObject) {
-  console.log('保存成功。')
-})
 
 let id = 0
 function idMaker() {
