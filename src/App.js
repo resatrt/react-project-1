@@ -4,8 +4,8 @@ import './reset.css';
 import TodoInput from './TodoInput/todoInput';
 import TodoItem from './TodoItem/todoItem';
 import 'normalize.css';
-import UserDialog from './UserDialog'
-
+import UserDialog from './UserDialog';
+import {getCurrentUser} from './leancloud';
 
 let id = 0
 function idMaker() {
@@ -17,7 +17,7 @@ class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      user: {},
+      user: getCurrentUser||{},
       newTodo: '',
       todoList: []
     }

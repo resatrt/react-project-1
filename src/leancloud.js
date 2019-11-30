@@ -25,6 +25,15 @@ export function signUp(username, password, successFn, errorFn) {
     return undefined
 }
 
+export function getCurrentUser(){
+    let user=AV.User.current()
+    if(user){
+        return getUserFormAVUser(user)
+    }else{
+        return null
+    }
+}
+
 function getUserFormAVUser(AVUser) {
 
     return {
