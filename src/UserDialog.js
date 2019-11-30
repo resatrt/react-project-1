@@ -1,6 +1,6 @@
 import React from 'react'
 import './UserDialog.css'
-import { signUp } from './leancloud'
+import { signUp,signIn } from './leancloud'
 
 export default class UserDialog extends React.Component {
     constructor(props) {
@@ -25,11 +25,21 @@ export default class UserDialog extends React.Component {
             this.props.onSignUp.call(null, user)//用call 就不指定this
         }
         let error = (error) => {
-            console.log(error)
+            alert(error)
         }
         signUp(username, password, success, error)
     }
-    signIn() { }
+    signIn(e) {
+        e.preventDefault()
+        let {username,password}=this.state.formData
+        let success=(user)=>{
+            this.props.onSignIn.call(null,user)
+        }
+        let error=(error)=>{
+            alert(error)
+        }
+        signIn(username,password,success,error)
+     }
     changeFormData(key, e) { //前面的参数是绑定的，username之类的，后面的是事件本身
         let stateCopy = JSON.parse(JSON.stringify(this.state))//用JSON 深拷贝
         stateCopy.formData[key] = e.target.value  //改state里的值必须用setstate，不然会报错
