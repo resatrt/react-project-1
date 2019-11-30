@@ -5,7 +5,7 @@ import TodoInput from './TodoInput/todoInput';
 import TodoItem from './TodoItem/todoItem';
 import 'normalize.css';
 import UserDialog from './UserDialog';
-import {getCurrentUser} from './leancloud';
+import {getCurrentUser,signOut} from './leancloud';
 
 let id = 0
 function idMaker() {
@@ -56,6 +56,12 @@ class App extends React.Component {
     stateCopy.user = user
     this.setState(stateCopy) //此处传入的值被智能提示成this.state了，因此更新的不是更改后的state值，导致注册完成后userDialog不消失
   }
+  signOut(){
+    signOut()
+    let stateCopy=JSON.parse(JSON.stringify(this.state))
+    stateCopy.user={}
+    this.setState(stateCopy)
+  }
   render() {
     let todos = this.state.todoList
       .filter((item) => !item.delated)//filter函数是个筛选函数,此处item.delated的值为false，
@@ -71,7 +77,8 @@ class App extends React.Component {
 
     return (
       <div className='App'>
-        <h1>{this.state.user.username || '我'}的待办</h1>
+        <h1>{this.state.user.username || '我'}的待办
+    {this.state.user.id?<button onClick={this.signOut.bind(this)}>登出</button>:null}</h1>
         <div className='inputWrapper'>
           {<TodoInput
             content={this.state.newTodo}
