@@ -8,28 +8,28 @@ AV.init({
 
 export default AV
 
-export function signUp(username,password,successFn,errorFn){
+export function signUp(username, password, successFn, errorFn) {
     //新建AVUser对象实例
-    var user=new AV.User()
+    var user = new AV.User()
     //设置用户名
     user.setUsername(username)
     //设置密码
     user.setPassword(password)
     //设置邮箱,没写
-    user.signUp().then(function(loginedUser){
-        let user= getUserFormAVUser(loginedUser)
-        successFn.call(null,user)
-    },function(error){
-        errorFn.call(null,error)
+    user.signUp().then(function (loginedUser) {
+        let user = getUserFormAVUser(loginedUser)
+        successFn.call(null, user)
+    }, function (error) {
+        errorFn.call(null, error)
     })
     return undefined
 }
 
-function getUserFormAVUser(AVUser){
-   
-    return{
-        id:AVUser.id,
+function getUserFormAVUser(AVUser) {
+
+    return {
+        id: AVUser.id,
         ...AVUser.attributes   //就是把 AVUser.attributes 的属性拷贝到这个对象
     }
-    
+
 }

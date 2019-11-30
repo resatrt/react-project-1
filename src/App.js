@@ -54,7 +54,7 @@ class App extends React.Component {
   onSignUp(user) {
     let stateCopy = JSON.parse(JSON.stringify(this.state))
     stateCopy.user = user
-    this.setState(this.state)
+    this.setState(stateCopy) //此处传入的值被智能提示成this.state了，因此更新的不是更改后的state值，导致注册完成后userDialog不消失
   }
   render() {
     let todos = this.state.todoList
