@@ -2,6 +2,8 @@ import React from 'react'
 import './UserDialog.css'
 import { signUp, signIn } from './leancloud'
 
+
+
 export default class UserDialog extends React.Component {
     constructor(props) {
         super(props)
@@ -59,7 +61,7 @@ export default class UserDialog extends React.Component {
         stateCopy.formData[key] = e.target.value  //改state里的值必须用setstate，不然会报错
         this.setState(stateCopy)
     }
-
+   
     render() {
         let signUpForm = (
             <form className='signUp' onSubmit={this.signUp.bind(this)}>
@@ -80,6 +82,7 @@ export default class UserDialog extends React.Component {
             </form>
         )
         let signInForm = (
+            
             <form className='signIn' onSubmit={this.signIn.bind(this)}>
                 <div className='row'>
                     <label>用户名</label>
@@ -92,7 +95,8 @@ export default class UserDialog extends React.Component {
                         onChange={this.changeFormData.bind(this, 'password')} />
                 </div>
                 <div className='row action'>
-                    <button type='submit'>登录</button>
+                    <button type='submit'>登录</button>  
+                    <a href="javascript:;">忘记密码了？</a>
                 </div>
             </form>
         )
