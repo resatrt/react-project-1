@@ -51,15 +51,10 @@ class App extends React.Component {
     todo.delated = true
     this.setState(this.state)
   }
-  onSignUp(user) {
+  onSignUpOrSignIn(user) {
     let stateCopy = JSON.parse(JSON.stringify(this.state))
     stateCopy.user = user
     this.setState(stateCopy) //此处传入的值被智能提示成this.state了，因此更新的不是更改后的state值，导致注册完成后userDialog不消失
-  }
-  onSignIn(user){
-    let stateCopy=JSON.parse(JSON.stringify(this.state))
-    stateCopy.user=user
-    this.setState(stateCopy)
   }
   signOut(){
     signOut()
@@ -96,8 +91,8 @@ class App extends React.Component {
         {this.state.user.id ? 
         null : 
         <UserDialog 
-        onSignUp={this.onSignUp.bind(this)} 
-        onSignIn={this.onSignIn.bind(this)}/>}
+        onSignUp={this.onSignUpOrSignIn.bind(this)} 
+        onSignIn={this.onSignUpOrSignIn.bind(this)}/>}
       </div>
     )
   }
