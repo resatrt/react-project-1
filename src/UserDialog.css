@@ -7,7 +7,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background: hsla(0,0%,0%,0.40);
+    background: hsla(0, 0%, 0%, 0.40);
 }
 
 .UserDialog {
@@ -23,19 +23,24 @@
     margin-left: -2em;
 }
 
-.UserDialog .signInOrSignUp>nav:first-child label{
-   margin-left: 2em;
-   cursor: pointer;    /*鼠标移动到label上变为手*/
+.UserDialog .signInOrSignUp>nav:first-child label {
+    margin-left: 2em;
+    cursor: pointer;
+    /*鼠标移动到label上变为手*/
 }
 
-.UserDialog .forgotPassword>h3{
-    padding: 1em 1em .5em 1em;
+.UserDialog .panes{
+    padding: 0 1em 1em;
+}
+.UserDialog .forgotPassword>h3 {
+    padding: 1em;
     text-align: center;
 }
 
-.UserDialog .forgotPassword> form{
+.UserDialog .forgotPassword>form {
     padding: 0 1em 1em;
 }
+
 .UserDialog form>.row {
     display: flex;
     padding: .1em 0 .3em 0;
@@ -44,15 +49,19 @@
 .UserDialog form>.row>label:first-child {
     width: 4em;
 }
+
 .UserDialog form>.row.action {
-    padding-left: 4em;
+    padding-left: 8em;
     display: flex;
-   align-items: center;
+    align-items: center;
 }
-.UserDialog button{
+.UserDialog form>.row.action>a {
+    margin-left: 1em;
+    font-size: small;
+}
+
+.UserDialog button {
     font: inherit;
     padding: .2em;
-    margin: 0 auto;
-    margin-top: .4em;
     border-radius: 3px;
 }

@@ -9,7 +9,7 @@ export default class UserDialog extends React.Component {
         super(props)
         this.state = {
             selected: 'signUp',
-            selectedTab: 'signUp',
+            selectedTab: 'signInOrSignUp',
             formData: {
                 email: '',
                 username: '',
@@ -58,7 +58,7 @@ export default class UserDialog extends React.Component {
         }
         signIn(username, password, success, error)
     }
-    changeFormData(key, e) { //前面的参数是绑定的，username之类的，后面的是事件本身
+    changeFormData(key, e) { //第一个的参数是绑定的，username之类的，后面的是事件本身
         let stateCopy = JSON.parse(JSON.stringify(this.state))//用JSON 深拷贝
         stateCopy.formData[key] = e.target.value  //改state里的值必须用setstate，不然会报错
         this.setState(stateCopy)
@@ -71,6 +71,11 @@ export default class UserDialog extends React.Component {
     resetPassword(e) {
         e.preventDefault()
         sendPasswordResetEmail(this.state.formData.email)
+    }
+    returnToSignIn(){
+        let stateCopy=JSON.parse(JSON.stringify(this.state))
+        stateCopy.selectedTab='signInOrSignUp'
+        this.setState(stateCopy)
     }
     render() {
         let signUpForm = (
@@ -92,7 +97,7 @@ export default class UserDialog extends React.Component {
                     <input type='password' value={this.state.formData.password}
                         onChange={this.changeFormData.bind(this, 'password')} />
                 </div>
-                <div className='row'>
+                <div className='row action'>
                     <button type='submit'>注册</button>
                 </div>
             </form>
@@ -144,8 +149,9 @@ export default class UserDialog extends React.Component {
                         <input type='text' value={this.state.formData.email}
                             onChange={this.changeFormData.bind(this, 'email')} />
                     </div>
-                    <div className='row actions'>
-                        <button type='submit'>发送重置邮件</button>
+                    <div className='row action'>
+                        <button type='submit'>发送</button>
+                        <a href='#' onClick={this.returnToSignIn.bind(this)}>返回登录</a>
                     </div>
                 </form>
             </div>
