@@ -137,7 +137,7 @@ export default class UserDialog extends React.Component {
         let forgotPassword = (
             <div className='forgotPassword'>
                 <h3>重置密码</h3>
-                <form className='forgotPassword' onSubmit={this.resetPassword.bind(this)}>
+                <form className='formPassword' onSubmit={this.resetPassword.bind(this)}>
                     <div className='row'>
                         <label>邮箱</label>
                         <input type='text' value={this.state.formData.email}
