@@ -10,6 +10,7 @@ export default class UserDialog extends React.Component {
         this.state = {
             selected: 'signUp',
             formData: {
+                email:'',
                 username: '',
                 password: ''
             }
@@ -22,7 +23,7 @@ export default class UserDialog extends React.Component {
     }
     signUp(e) {
         e.preventDefault()
-        let { username, password } = this.state.formData
+        let { email,username, password } = this.state.formData
         let success = (user) => {
             this.props.onSignUp.call(null, user)//用call 就不指定this
         }
@@ -36,7 +37,7 @@ export default class UserDialog extends React.Component {
                     break
             }
         }
-        signUp(username, password, success, error)
+        signUp(email,username, password, success, error)
     }
     signIn(e) {
         e.preventDefault()
@@ -65,6 +66,12 @@ export default class UserDialog extends React.Component {
     render() {
         let signUpForm = (
             <form className='signUp' onSubmit={this.signUp.bind(this)}>
+                <div className='row' >
+                    <label>邮箱</label>
+                    <input type='text' value={this.state.formData.email}
+                        onChange={this.changeFormData.bind(this, 'email')} />
+                    {/* bind 不仅可以绑定 this ，还可以绑定第一个参数*/}
+                </div> 
                 <div className='row' >
                     <label>用户名</label>
                     <input type='text' value={this.state.formData.username}
