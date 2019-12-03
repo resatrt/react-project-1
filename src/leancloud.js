@@ -16,7 +16,7 @@ export function signUp(email, username, password, successFn, errorFn) {
     //设置密码
     user.setPassword(password)
     //设置邮箱,没写
-    user.serEmail(email)
+    user.setEmail(email)
     user.signUp().then(function (loginedUser) {
         let user = getUserFormAVUser(loginedUser)
         successFn.call(null, user)
