@@ -17,6 +17,13 @@ export const TodoModel = {
         todo.set('status', status)
         todo.set('title', title)
         todo.set('delated', delated)
+
+        let acl = new AV.ACL()
+        //因为默认当前用户可读，默认 public 不可写
+        acl.setPublicReadAccess(false)
+        acl.setWriteAccess(AV.User.current(),true)
+        todo.setACL(acl)
+
         todo.save().then(function (response) {
             successFn.call(null, response.id)
         }, function (error) {
@@ -31,7 +38,7 @@ export const TodoModel = {
                 // console.log(t)
                 return { id: t.id, ...t.attributes }
             })
-            
+
             successFn.call(null, array)
         }, (error) => {
             errorFn && errorFn.call(null, error)
