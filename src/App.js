@@ -6,6 +6,22 @@ import TodoItem from './TodoItem/todoItem';
 import 'normalize.css';
 import UserDialog from './UserDialog';
 import {getCurrentUser,signOut} from './leancloud';
+import AV  from './leancloud'
+
+//声明类型
+var TodoFolder = AV.Object.extend('TodoFolder');
+//新建对象
+var todoFolder = new TodoFolder();
+//设置名称
+todoFolder.set('name','工作')
+//设置优先级
+todoFolder.set('priority',1)
+todoFolder.save().then(function(todo){
+  console.log('objectID is'+todo.id)
+},function(error){
+  console.log(error)
+})
+
 
 let id = 0
 function idMaker() {
