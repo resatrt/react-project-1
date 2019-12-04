@@ -21,7 +21,7 @@ export const TodoModel = {
         let acl = new AV.ACL()
         //因为默认当前用户可读，默认 public 不可写
         acl.setPublicReadAccess(false)
-        acl.setWriteAccess(AV.User.current(),true)
+        acl.setWriteAccess(AV.User.current(), true)
         todo.setACL(acl)
 
         todo.save().then(function (response) {
@@ -47,10 +47,14 @@ export const TodoModel = {
     update() {
 
     },
-    destroy() {
-
+    destroy(todoId, successFn, errorFn) {
+        let todo = AV.Object.createWithoutData('Todo', todoId)
+        todo.destroy().then(function (response) {
+            successFn && successFn.call(null)
+        }, function (error) {
+            errorFn && errorFn.call(null, error)
+        })
     }
-
 }
 
 export function signUp(email, username, password, successFn, errorFn) {
