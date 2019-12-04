@@ -23,6 +23,20 @@ export const TodoModel = {
             errorFn && errorFn.call(null, error)
         })
     },
+    getByUser(user, successFn, errorFn) {
+        let query = new AV.Query('Todo')
+        query.find().then((response) => { //批量操作
+            // console.log(response)
+            let array = response.map((t) => {
+                // console.log(t)
+                return { id: t.id, ...t.attributes }
+            })
+            
+            successFn.call(null, array)
+        }, (error) => {
+            errorFn && errorFn.call(null, error)
+        })
+    },
     update() {
 
     },
