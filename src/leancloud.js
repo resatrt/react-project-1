@@ -8,6 +8,30 @@ AV.init({
 
 export default AV
 
+export const TodoModel = {
+    create({ status, title, delated }, successFn, errorFn) {
+        //声明类型
+        let Todo = AV.Object.extend('Todo')
+        //新建对象
+        var todo = new Todo()
+        todo.set('status', status)
+        todo.set('title', title)
+        todo.set('delated', delated)
+        todo.save().then(function (response) {
+            successFn.call(null, response.id)
+        }, function (error) {
+            errorFn && errorFn.call(null, error)
+        })
+    },
+    update() {
+
+    },
+    destroy() {
+
+    }
+
+}
+
 export function signUp(email, username, password, successFn, errorFn) {
     //新建AVUser对象实例
     var user = new AV.User()
@@ -48,11 +72,11 @@ export function signOut() {
 }
 
 export function sendPasswordResetEmail(email, successFn, errorFn) {
-    AV.User.requestPasswordReset(email).then(function(success){
+    AV.User.requestPasswordReset(email).then(function (success) {
         successFn.call()
-    },function(error){
-        errorFn.call(null,error)
-    }) 
+    }, function (error) {
+        errorFn.call(null, error)
+    })
 }
 function getUserFormAVUser(AVUser) {
 

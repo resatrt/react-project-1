@@ -5,30 +5,9 @@ import TodoInput from './TodoInput/todoInput';
 import TodoItem from './TodoItem/todoItem';
 import 'normalize.css';
 import UserDialog from './UserDialog';
-import {getCurrentUser,signOut} from './leancloud';
-import AV  from './leancloud'
-
-//声明类型
-var TodoFolder = AV.Object.extend('TodoFolder');
-//新建对象
-var todoFolder = new TodoFolder();
-//设置名称
-todoFolder.set('name','工作')
-//设置优先级
-todoFolder.set('priority',1)
-todoFolder.save().then(function(todo){
-  console.log('objectID is'+todo.id)
-},function(error){
-  console.log(error)
-})
+import {getCurrentUser,signOut,TodoModel} from './leancloud';
 
 
-let id = 0
-function idMaker() {
-  id += 1
-
-  return id
-}
 class App extends React.Component {
   constructor(props) {
     super(props)
@@ -38,21 +17,24 @@ class App extends React.Component {
       todoList: []
     }
   }
-  componentDidUpdate() {
-
-  }
   addTodo(event) {
-    this.state.todoList.push({
-      id: idMaker(),
+    let newTodo={
       title: event.target.value,
       status: null,
       delated: false,
-    })
-    this.setState({
-      newTodo: '',
-      todoList: this.state.todoList
+    }
+    TodoModel.create(newTodo,(id)=>{
+      newTodo.id=id
+      this.state.todoList.push(newTodo)
+      this.setState({
+        newTodo:'',
+        todoList:this.state.todoList
+      })
+    },(error)=>{
+      console.log(error)
     })
   }
+
   changeTitle(event) {
     this.setState({
       newTodo: event.target.value,
