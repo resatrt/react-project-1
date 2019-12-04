@@ -28,7 +28,7 @@ class App extends React.Component {
   addTodo(event) {
     let newTodo = {
       title: event.target.value,
-      status: null,
+      status: '',
       delated: false,
     }
     TodoModel.create(newTodo, (id) => {
@@ -50,7 +50,14 @@ class App extends React.Component {
     })
   }
   toggle(e, todo) {
+    let oldStatus = todo.status
     todo.status = todo.status === 'completed' ? '' : 'completed'
+    TodoModel.update(todo, () => {
+      this.setState(this.state)
+    }, (error) => {
+      todo.status = oldStatus
+      this.setState(this.state)
+    })
     this.setState(this.state)
   }
   delate(event, todo) {
