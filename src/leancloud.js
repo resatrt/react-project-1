@@ -33,6 +33,7 @@ export const TodoModel = {
     },
     getByUser(user, successFn, errorFn) {
         let query = new AV.Query('Todo')
+        query.equalTo('delated',false) //可以在同一个查询中设置多个条件，这样可以获取满足所有条件的结果。可以理解为所有的条件是 AND 的关系：
         query.find().then((response) => { //批量操作
             // console.log(response)
             let array = response.map((t) => {
@@ -67,13 +68,15 @@ export const TodoModel = {
         })
     },
     destroy(todoId, successFn, errorFn) {
-        let todo = AV.Object.createWithoutData('Todo', todoId)
-        todo.destroy().then(function (response) {
-            successFn && successFn.call(null)
-        }, function (error) {
-            errorFn && errorFn.call(null, error)
-        })
+    //     let todo = AV.Object.createWithoutData('Todo', todoId)
+    //     todo.destroy().then(function (response) {
+    //         successFn && successFn.call(null)
+    //     }, function (error) {
+    //         errorFn && errorFn.call(null, error)
+    //     })
+    TodoModel.update({id:todoId,delated:true},successFn,errorFn)
     }
+
 }
 
 export function signUp(email, username, password, successFn, errorFn) {
